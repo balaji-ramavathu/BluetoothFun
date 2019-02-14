@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnGetConnected"
         android:text="scan for available devices"
-        android:layout_below="@id/etBluetoothName"/>
+        android:layout_below="@id/btnSetName"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

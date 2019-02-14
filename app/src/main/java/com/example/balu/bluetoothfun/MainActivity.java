@@ -1,11 +1,13 @@
 package com.example.balu.bluetoothfun;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         listView=findViewById(R.id.listConnected);
         final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001);
         mBluetoothAdapter.startDiscovery();
         btnTurnBluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("LISTNITIN","e");
+                mBluetoothAdapter.startDiscovery();
                 ConnectedAdapter adapter=new ConnectedAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,list);
                 listView.setAdapter(adapter);
             }
@@ -87,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-
         // Don't forget to unregister the ACTION_FOUND receiver.
         unregisterReceiver(mReceiver);
     }
